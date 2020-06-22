@@ -17,6 +17,7 @@ class TimerContainer extends Component {
         }
       ]
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   tick() {
@@ -36,15 +37,24 @@ class TimerContainer extends Component {
     })
   }
 
-  addTimer() {
+  addTimer(startTime=10, tickValue=10) {
+    startTime = parseInt(startTime);
+    tickValue = parseInt(tickValue);
+    // if startTime or tickValue are not a number greater than 0 set the values of them to 1
+    if(!startTime) {
+      startTime = 1;
+    }
+    if(!tickValue) {
+      tickValue = 1;
+    }
     this.setState((state) => {
       const listCopy = JSON.parse(JSON.stringify(state.list))
       return {
         list: [
           ...listCopy, // copy of all the existing timers
           {
-            currentTick: 0,
-            tickValue: 1
+            currentTick: startTime,
+            tickValue: tickValue
           }
         ]
       }
@@ -68,6 +78,14 @@ class TimerContainer extends Component {
     )
   }
 
+  handleSubmit(e) {
+    console.log('handle submit called');
+    e.preventDefault();
+    const currentTarget = e.currentTarget;
+    const formData = new FormData(currentTarget);
+    this.addTimer();
+  }
+
   render() {
     return(
       <div>
@@ -77,8 +95,14 @@ class TimerContainer extends Component {
           })
         }
         {/* onClick is a synthetic event. They're just like DOM events. */}
-        <button onClick={(e) => this.addTimer()}>Add Timer</button>
         <button onClick={(e) => this.removeTimer()}>Remove Timer</button>
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor='currentTick'>Current Tick</label>
+          <input name='currentTick'></input>
+          <label htmlFor='tickValue'>Tick Value</label>
+          <input name='tickValue'></input>
+          <input type='submit' value='Add Timer'></input>
+        </form>
       </div>
     )
   }
