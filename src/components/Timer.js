@@ -22,8 +22,7 @@ class Timer extends Component {
     }
   }
 
-  // this method gets triggered when the component (node) mounts onto the DOM
-  componentDidMount() {
+  tick() {
     // if you need to update the state you can only use this.setState
     this.setState((state) => {
       // state is the current state of the component
@@ -32,6 +31,13 @@ class Timer extends Component {
         seconds: state.seconds + 1
       }
     })
+  }
+
+  // this method gets triggered when the component (node) mounts onto the DOM
+  componentDidMount() {
+    setInterval(() => {
+      this.tick();
+    }, 1000)
   }
 
   // Class Components use the render() method to return JSX
