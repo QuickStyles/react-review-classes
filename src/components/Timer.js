@@ -9,6 +9,12 @@ import React, { Component } from 'react';
 // Functional
 // - Simpler
 
+/**
+ * dsfjadslfjdslfjsdldfsjlfkdjs
+ * 
+ * @param {number} startTime - This is the start time of the component
+ * @param {number} tickValue - This is the amount the timer increases per second
+ */
 class Timer extends Component {
   // constructor method gets called everytime an instance of the class is created
   constructor(props) {
@@ -18,7 +24,7 @@ class Timer extends Component {
 
     // State allows an individual instance of a component to hold their own data.
     this.state = {
-      seconds: 0
+      seconds: this.props.startTime
     }
   }
 
@@ -28,7 +34,7 @@ class Timer extends Component {
       // state is the current state of the component
       // setState should always return an object. This object gets merged into the current state.
       return {
-        seconds: state.seconds + 1
+        seconds: state.seconds + this.props.tickValue
       }
     })
   }
@@ -43,6 +49,7 @@ class Timer extends Component {
   // Class Components use the render() method to return JSX
   // we have access to the state by calling this.state
   render() {
+    console.log(this.props);
     console.log('rendering...' + ' ' + this.state.seconds)
     return(
       <div>

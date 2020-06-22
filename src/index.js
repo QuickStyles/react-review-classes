@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Timer from './components/Timer';
+import TimerContainer from './components/TimerContainer';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <Timer />,
+  <TimerContainer/>,
   document.getElementById('root')
 );
 
