@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CharacterList from './CharacterList';
 import { getCharacters } from '../requests';
 
 class App extends Component {
@@ -29,13 +30,7 @@ class App extends Component {
   render() {
     return(
       <div>
-        { this.state.characters.map(c => {
-          return(
-            <div>
-              {JSON.stringify(c)}
-            </div>
-          )
-        })}
+        <CharacterList characters={this.state.characters}/>
       </div>
     )
   }
