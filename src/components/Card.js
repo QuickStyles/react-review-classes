@@ -14,9 +14,13 @@ function Card(props) {
 const styles = {
   container: {
     width: '400px',
+    height: '540px',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    border: 'solid black 2px',
+    marginTop: '5px',
+    marginBottom: '5px'
   },
   text: {
     width: '300px'

@@ -15,7 +15,8 @@ const style = {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justfiyContent: 'space-evenly'
+    justifyContent: 'space-between',
+    padding: '20px'
   }
 }
 
