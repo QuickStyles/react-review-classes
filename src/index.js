@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App';
 import Timer from './components/Timer';
 import TimerContainer from './components/TimerContainer';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <TimerContainer/>,
+  <App/>,
   document.getElementById('root')
 );
 
