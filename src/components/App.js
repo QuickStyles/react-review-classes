@@ -29,10 +29,16 @@ class App extends Component {
 
   render() {
     return(
-      <div>
+      <div style={styles.container}>
         <CharacterList characters={this.state.characters}/>
       </div>
     )
+  }
+}
+
+const styles = {
+  container: {
+    width: '100vw'
   }
 }
 
