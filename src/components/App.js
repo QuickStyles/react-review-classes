@@ -8,7 +8,7 @@ class App extends Component {
 
     this.state = {
       characters: [],
-      selectedCharacter: null
+      selectedCharacter: {}
     }
     this.selectCharacter = this.selectCharacter.bind(this)
   }
@@ -46,7 +46,7 @@ class App extends Component {
   render() {
     return(
       <div style={styles.container}>
-        <CharacterPage characters={this.state.characters} selectCharacter={this.selectCharacter}/>
+        <CharacterPage characters={this.state.characters} selectCharacter={this.selectCharacter} pickedCharacter={this.state.selectedCharacter}/>
       </div>
     )
   }

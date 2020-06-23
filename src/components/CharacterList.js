@@ -4,9 +4,10 @@ import Card from './Card';
 function CharacterList(props) {
   const characters = props.characters;
   const selectCharacter = props.selectCharacter;
+  const pickedCharacter = props.pickedCharacter;
   return(
     <div style={style.container}>
-      { characters.map(c => <Card key={c.id} character={c} selectCharacter={selectCharacter}/>) }
+      { characters.map(c => <Card key={c.id} character={c} selectCharacter={selectCharacter} pickedCharacter={pickedCharacter}/>) }
     </div>
   )
 }
