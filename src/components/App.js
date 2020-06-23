@@ -4,12 +4,23 @@ import { getCharacters } from '../requests';
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      characters: []
+    }
   }
 
   componentDidMount() {
     // send fetch(ajax) request
     getCharacters()
-      .then(payload => console.log(payload))
+      .then(payload => {
+        const characters = payload.data.results // Array of all the characters
+        this.setState((state) => {
+          return {
+            characters: characters
+          }
+        })
+      })
       .catch(err => {
         console.log(err);
       })
@@ -17,7 +28,15 @@ class App extends Component {
 
   render() {
     return(
-      <div>Hello World</div>
+      <div>
+        { this.state.characters.map(c => {
+          return(
+            <div>
+              {JSON.stringify(c)}
+            </div>
+          )
+        })}
+      </div>
     )
   }
 }
