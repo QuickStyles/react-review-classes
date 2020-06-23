@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CharacterList from './CharacterList';
 import { getCharacters } from '../requests';
+import CharacterPage from './CharacterIndex';
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class App extends Component {
   render() {
     return(
       <div style={styles.container}>
-        <CharacterList characters={this.state.characters}/>
+        <CharacterPage characters={this.state.characters}/>
       </div>
     )
   }
