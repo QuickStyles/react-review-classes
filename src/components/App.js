@@ -7,8 +7,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-      characters: []
+      characters: [],
+      selectedCharacter: null
     }
+    this.selectCharacter = this.selectCharacter.bind(this)
   }
 
   componentDidMount() {
@@ -27,10 +29,24 @@ class App extends Component {
       })
   }
 
+  selectCharacter(id) {
+    // id will be a nubmer like 1112312
+    const foundCharacter = this.state.characters.filter((char) => {
+      return char.id === id
+    })[0]
+    if(foundCharacter) {
+      this.setState((state) => {
+        return {
+          selectedCharacter: foundCharacter
+        }
+      })
+    }
+  }
+
   render() {
     return(
       <div style={styles.container}>
-        <CharacterPage characters={this.state.characters}/>
+        <CharacterPage characters={this.state.characters} selectCharacter={this.selectCharacter}/>
       </div>
     )
   }
