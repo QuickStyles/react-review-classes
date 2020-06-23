@@ -1,18 +1,11 @@
 import React from 'react';
+import Card from './Card';
 
 function CharacterList(props) {
   const characters = props.characters;
   return(
     <div>
-      { characters.map(c => {
-        return(
-          <div key={c.id}>
-            <h2>{c.name}</h2>
-            <img src='#' width='300px' height='300px'></img>
-            <p>{c.description}</p>
-          </div>
-        )
-      })}
+      { characters.map(c => <Card key={c.id} character={c}/>) }
     </div>
   )
 }
