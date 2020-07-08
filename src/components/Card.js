@@ -1,4 +1,5 @@
 import React from 'react';
+import CharacterStatsList from './CharacterStatsList';
 
 function Card(props) {
   const character = props.character
@@ -10,10 +11,19 @@ function Card(props) {
   }
 
   const containerStyles = character.id === pickedCharacter.id ? {...styles.container, border: 'solid red 2px'} : {...styles.container}
+  const stats = {
+    durability: character.durability,
+    energy: character.energy,
+    fighting: character.fighting_skills,
+    intelligence: character.intelligence,
+    speed: character.speed,
+    strength: character.strength
+  }
   return(
     <div key={character.id} style={containerStyles} onClick={(e) => handleClick(e, character.id)}>
       <h2>{character.name}</h2>
       <img src={`${character.thumbnail_url}`} width='300px' height='300px'></img>
+      <CharacterStatsList stats={stats}/>
       <p style={styles.text}>{character.description}</p>
     </div>
   )
