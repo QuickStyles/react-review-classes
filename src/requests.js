@@ -15,3 +15,17 @@ export const Characters = {
       .then(payload => payload);
   }
 }
+
+export const User = {
+  create(userData) {
+    return fetch(`${BASE_URL}/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    })
+      .then(res => res.json())
+      .then(payload => payload)
+  }
+}
