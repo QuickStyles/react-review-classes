@@ -13,7 +13,7 @@ function Card(props) {
   return(
     <div key={character.id} style={containerStyles} onClick={(e) => handleClick(e, character.id)}>
       <h2>{character.name}</h2>
-      <img src={`${character.thumbnail.path}.${character.thumbnail.extension}`} width='300px' height='300px'></img>
+      <img src={`${character.thumbnail_url}`} width='300px' height='300px'></img>
       <p style={styles.text}>{character.description}</p>
     </div>
   )

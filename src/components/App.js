@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getCharacters } from '../requests';
+import { getCharacters, Characters } from '../requests';
 import CharacterPage from './CharacterIndex';
 
 class App extends Component {
@@ -15,17 +15,14 @@ class App extends Component {
 
   componentDidMount() {
     // send fetch(ajax) request
-    getCharacters()
+    Characters.index()
       .then(payload => {
-        const characters = payload.data.results // Array of all the characters
+        const charactersList = payload.characters;
         this.setState((state) => {
           return {
-            characters: characters
+            characters: charactersList
           }
         })
-      })
-      .catch(err => {
-        console.log(err);
       })
   }
 
