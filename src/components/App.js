@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getCharacters, Characters } from '../requests';
 import CharacterPage from './CharacterIndex';
 import NewUserForm from './NewUserForm';
+import SessionCreatePage from '../Page/SessionCreatePage';
 
 class App extends Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class App extends Component {
       <div style={styles.container}>
         <NewUserForm/>
         <CharacterPage characters={this.state.characters} selectCharacter={this.selectCharacter} pickedCharacter={this.state.selectedCharacter}/>
+        <SessionCreatePage/>
       </div>
     )
   }

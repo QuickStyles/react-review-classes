@@ -29,3 +29,18 @@ export const User = {
       .then(payload => payload)
   }
 }
+
+export const Session = {
+  create(loginData) {
+    return fetch(`${BASE_URL}/session`, 
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(loginData)
+    })
+      .then(res => res.json())
+  }
+}
