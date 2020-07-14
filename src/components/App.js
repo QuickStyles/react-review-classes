@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { getCharacters, Characters } from '../requests';
+import { getCharacters, Characters, User } from '../requests';
 import CharacterPage from './CharacterIndex';
 import NewUserForm from './NewUserForm';
 import SessionCreatePage from '../Page/SessionCreatePage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './Navbar';
-
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       characters: [],
-      selectedCharacter: {}
+      selectedCharacter: {},
+      user: {} 
     }
     this.selectCharacter = this.selectCharacter.bind(this)
   }
@@ -28,6 +28,16 @@ class App extends Component {
           }
         })
       })
+
+    User.current()
+      .then(payload => {
+        this.setState(state => {
+          return {
+            user: payload
+          }
+        })
+      })
+      
   }
 
   selectCharacter(id) {

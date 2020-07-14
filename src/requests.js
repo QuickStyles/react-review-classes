@@ -27,8 +27,22 @@ export const User = {
     })
       .then(res => res.json())
       .then(payload => payload)
+  },
+
+  current(){
+    return fetch(`${BASE_URL}/users/current`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    })
+      .then(res => res.json())
   }
+  
 }
+
+
 
 export const Session = {
   create(loginData) {
