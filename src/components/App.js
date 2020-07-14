@@ -3,7 +3,7 @@ import { getCharacters, Characters } from '../requests';
 import CharacterPage from './CharacterIndex';
 import NewUserForm from './NewUserForm';
 import SessionCreatePage from '../Page/SessionCreatePage';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 class App extends Component {
   constructor(props) {
@@ -46,10 +46,13 @@ class App extends Component {
   render() {
     return(
       <BrowserRouter>
-        <Route path='/cards' render={() => <CharacterPage characters={this.state.characters} selectCharacter={this.selectCharacter} pickedCharacter={this.state.selectedCharacter}/>}/>
-        <Route path='/users/new' component={NewUserForm}/>
-        <Route path='/sign_in' component={SessionCreatePage}/>
-        <Route path='/' render={() => <div>Root Page</div>}/>
+        <Switch>
+          <Route path='/cards/:id' render={() => <div style={{backgroundColor: 'red', width: '200px', height: '200px'}}>Red</div>} />
+          <Route path='/cards' render={() => <CharacterPage characters={this.state.characters} selectCharacter={this.selectCharacter} pickedCharacter={this.state.selectedCharacter}/>}/>
+          <Route path='/users/new' component={NewUserForm}/>
+          <Route path='/sign_in' component={SessionCreatePage}/>
+          <Route path='/' render={() => <div>Root Page</div>}/>
+        </Switch>
       </BrowserRouter>
     )
   }
