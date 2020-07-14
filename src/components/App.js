@@ -3,6 +3,7 @@ import { getCharacters, Characters } from '../requests';
 import CharacterPage from './CharacterIndex';
 import NewUserForm from './NewUserForm';
 import SessionCreatePage from '../Page/SessionCreatePage';
+import { BrowserRouter, Route } from 'react-router-dom'
 
 class App extends Component {
   constructor(props) {
@@ -44,11 +45,10 @@ class App extends Component {
 
   render() {
     return(
-      <div style={styles.container}>
+      <BrowserRouter>
+        <Route path='/users/new' component={NewUserForm}/>
         <NewUserForm/>
-        <CharacterPage characters={this.state.characters} selectCharacter={this.selectCharacter} pickedCharacter={this.state.selectedCharacter}/>
-        <SessionCreatePage/>
-      </div>
+      </BrowserRouter>
     )
   }
 }
