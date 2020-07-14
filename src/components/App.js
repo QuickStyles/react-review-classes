@@ -46,8 +46,10 @@ class App extends Component {
   render() {
     return(
       <BrowserRouter>
+        <Route path='/cards' render={() => <CharacterPage characters={this.state.characters} selectCharacter={this.selectCharacter} pickedCharacter={this.state.selectedCharacter}/>}/>
         <Route path='/users/new' component={NewUserForm}/>
-        <NewUserForm/>
+        <Route path='/sign_in' component={SessionCreatePage}/>
+        <Route path='/' render={() => <div>Root Page</div>}/>
       </BrowserRouter>
     )
   }
