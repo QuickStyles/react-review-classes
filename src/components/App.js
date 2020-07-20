@@ -5,6 +5,8 @@ import NewUserForm from './NewUserForm';
 import SessionCreatePage from '../Page/SessionCreatePage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './Navbar';
+import CreateDeckPage from '../Page/CreateDeckPage';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +17,7 @@ class App extends Component {
       user: {} 
     }
     this.selectCharacter = this.selectCharacter.bind(this)
+    this.getCurrentUser = this.getCurrentUser.bind(this)
   }
 
   componentDidMount() {
@@ -29,6 +32,11 @@ class App extends Component {
         })
       })
 
+    this.getCurrentUser();
+      
+  }
+
+  getCurrentUser() {
     User.current()
       .then(payload => {
         this.setState(state => {
@@ -37,7 +45,6 @@ class App extends Component {
           }
         })
       })
-      
   }
 
   selectCharacter(id) {
@@ -57,12 +64,13 @@ class App extends Component {
   render() {
     return(
       <BrowserRouter>
-        <Navbar />
+        <Navbar user={ this.state.user }/>
         <Switch>
           <Route path='/cards/:id' render={() => <div style={{backgroundColor: 'red', width: '200px', height: '200px'}}>Red</div>} />
           <Route path='/cards' render={() => <CharacterPage characters={this.state.characters} selectCharacter={this.selectCharacter} pickedCharacter={this.state.selectedCharacter}/>}/>
           <Route path='/users/new' component={NewUserForm}/>
-          <Route path='/sign_in' component={SessionCreatePage}/>
+          <Route path='/sign_in' render={(routeProps) => <SessionCreatePage getCurrentUser={this.getCurrentUser} {...routeProps} />}/>
+          <Route path='/decks/new' render={() => <CreateDeckPage availableCards={this.state.characters}/> } />
           <Route path='/' render={() => <div>Root Page</div>}/>
         </Switch>
       </BrowserRouter>

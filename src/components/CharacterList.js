@@ -6,7 +6,7 @@ function CharacterList(props) {
   const selectCharacter = props.selectCharacter;
   const pickedCharacter = props.pickedCharacter;
   return(
-    <div style={style.container}>
+    <div style={{...style.container, ...props.style}}>
       { characters.map(c => <Card key={c.id} character={c} selectCharacter={selectCharacter} pickedCharacter={pickedCharacter}/>) }
     </div>
   )

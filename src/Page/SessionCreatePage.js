@@ -18,7 +18,11 @@ export default class SessionCreatePage extends Component {
     const userData = this.state.loginData
     console.log(userData)
     Session.create(userData)
-    .then((res) =>{console.log(res)} )
+      .then((res) =>{
+        console.log(res)
+        this.props.getCurrentUser()
+        this.props.history.push('/cards');
+      })
   }
 
   updateLoginData = (updatedLoginData) => {
