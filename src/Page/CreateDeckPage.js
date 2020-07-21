@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import CharacterList from '../components/CharacterList';
+import { Deck } from '../requests';
 
+const MAX_DECK_CARDS_COUNT = 5;
 class CreateDeckPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedCards : []
+      selectedCards: [],
+      error: null
     }
     this.updateSelectedCards = this.updateSelectedCards.bind(this);
   }
 
   updateSelectedCards(id) {
-    // 1) filter props.availableCards to find the card with `id`
-    // 2) push this card to selectedCards
+    if (this.state.selectedCards.length >= MAX_DECK_CARDS_COUNT) {
+      this.setState(() => {
+        return {
+          error: `A deck can not have more than ${MAX_DECK_CARDS_COUNT} cards`
+        }
+      })
+      return
+    }
     const selectedCard = this.props.availableCards.filter((card) => {
       return card.id === id
     })[0];
@@ -25,9 +34,31 @@ class CreateDeckPage extends Component {
     }
   }
 
+  saveDeck = () => {
+    const allCards = this.state.selectedCards
+    const deckData = {
+      deck: {
+        selectedCards: allCards,
+        name: 'all cards'
+      }
+    }
+    Deck.create(deckData)
+      .then(payload => console.log(payload));
+    // 1) get all the cards from state
+    // 2) send a fetch request POST /decks with Params:
+    // {
+    //   deck: {
+    //     selectedCards: [],
+    //     name: 'some string'
+    //   }
+    // }
+    
+  }
+
   render() {
     return (
       <div>
+        { this.state.error ? <p>{this.state.error}</p> : null }
         <div className='availableCards' style={{ backgroundColor: 'red'}}>
           <CharacterList 
             characters={this.props.availableCards} 
@@ -35,6 +66,7 @@ class CreateDeckPage extends Component {
             selectCharacter={this.updateSelectedCards}
           />
         </div>
+        <button onClick={this.saveDeck}>save Deck</button>
         <div className="selectedCards" style={{ backgroundColor: 'blue'}}>
           <CharacterList
             characters={this.state.selectedCards}

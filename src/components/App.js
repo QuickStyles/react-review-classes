@@ -24,7 +24,7 @@ class App extends Component {
     // send fetch(ajax) request
     Characters.index()
       .then(payload => {
-        const charactersList = payload.characters;
+        const charactersList = payload.cards;
         this.setState((state) => {
           return {
             characters: charactersList

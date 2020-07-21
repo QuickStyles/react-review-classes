@@ -10,9 +10,8 @@ export function getCharacters() {
 
 export const Characters = {
   index() {
-    return fetch(`${BASE_URL}/characters`)
+    return fetch(`${BASE_URL}/cards`)
       .then(res => res.json())
-      .then(payload => payload);
   }
 }
 
@@ -43,7 +42,6 @@ export const User = {
 }
 
 
-
 export const Session = {
   create(loginData) {
     return fetch(`${BASE_URL}/session`, 
@@ -56,5 +54,20 @@ export const Session = {
       body: JSON.stringify(loginData)
     })
       .then(res => res.json())
+  }
+}
+
+export const Deck = {
+  create(deckData){
+    return fetch(`${BASE_URL}/decks`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(deckData)
+    })
+    .then(res => res.json())
   }
 }
