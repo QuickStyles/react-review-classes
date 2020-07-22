@@ -6,11 +6,24 @@ function DecksIndexPage(props) {
     <div>
       {
         decks.map(deck => {
-          return <div>{ deck.name }</div>
+          return(
+            <div style={styles.container}>
+              <h3>{ deck.name }</h3>
+              <p>Card Count: {deck.cards.length}</p>
+            </div>
+          )
         })
       }
     </div>
   )
+}
+
+const styles = {
+  container: {
+    width: '200px',
+    height: '200px',
+    backgroundColor: 'lightblue'
+  }
 }
 
 export default DecksIndexPage
