@@ -45,7 +45,9 @@ class CreateDeckPage extends Component {
       }
     }
     Deck.create(deckData)
-      .then(payload => console.log(payload));
+      .then(payload => {
+        this.props.handleCreateDeck();
+      });
     // 1) get all the cards from state
     // 2) send a fetch request POST /decks with Params:
     // {

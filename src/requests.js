@@ -69,5 +69,14 @@ export const Deck = {
       body: JSON.stringify(deckData)
     })
     .then(res => res.json())
+  },
+
+  forCurrentUser() {
+    return fetch(
+      `${BASE_URL}/users/decks`,
+      {
+        credentials: 'include'
+    })
+      .then(res => res.json())
   }
 }

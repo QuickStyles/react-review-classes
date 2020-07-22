@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { getCharacters, Characters, User } from '../requests';
+import { getCharacters, Characters, User, Deck } from '../requests';
 import CharacterPage from './CharacterIndex';
 import NewUserForm from './NewUserForm';
 import SessionCreatePage from '../Page/SessionCreatePage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './Navbar';
 import CreateDeckPage from '../Page/CreateDeckPage';
+import DecksIndexPage from '../Page/DecksIndexPage';
 
 class App extends Component {
   constructor(props) {
@@ -14,10 +15,12 @@ class App extends Component {
     this.state = {
       characters: [],
       selectedCharacter: {},
-      user: {} 
+      user: {},
+      userDecks: []
     }
-    this.selectCharacter = this.selectCharacter.bind(this)
-    this.getCurrentUser = this.getCurrentUser.bind(this)
+    this.selectCharacter = this.selectCharacter.bind(this);
+    this.getCurrentUser = this.getCurrentUser.bind(this);
+    this.getDecksForCurrentUser = this.getDecksForCurrentUser.bind(this);
   }
 
   componentDidMount() {
@@ -33,7 +36,7 @@ class App extends Component {
       })
 
     this.getCurrentUser();
-      
+    this.getDecksForCurrentUser();
   }
 
   getCurrentUser() {
@@ -42,6 +45,17 @@ class App extends Component {
         this.setState(state => {
           return {
             user: payload
+          }
+        })
+      })
+  }
+
+  getDecksForCurrentUser() {
+    Deck.forCurrentUser()
+      .then(result => {
+        this.setState(state => {
+          return {
+            userDecks: result
           }
         })
       })
@@ -70,7 +84,8 @@ class App extends Component {
           <Route path='/cards' render={() => <CharacterPage characters={this.state.characters} selectCharacter={this.selectCharacter} pickedCharacter={this.state.selectedCharacter}/>}/>
           <Route path='/users/new' component={NewUserForm}/>
           <Route path='/sign_in' render={(routeProps) => <SessionCreatePage getCurrentUser={this.getCurrentUser} {...routeProps} />}/>
-          <Route path='/decks/new' render={() => <CreateDeckPage availableCards={this.state.characters}/> } />
+          <Route path='/decks/new' render={() => <CreateDeckPage availableCards={this.state.characters} handleCreateDeck={this.getDecksForCurrentUser}/> } />
+          <Route path='/decks' render={()  => <DecksIndexPage decks={this.state.userDecks} /> } />
           <Route path='/' render={() => <div>Root Page</div>}/>
         </Switch>
       </BrowserRouter>
