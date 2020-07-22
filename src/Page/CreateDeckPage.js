@@ -6,9 +6,11 @@ const MAX_DECK_CARDS_COUNT = 5;
 class CreateDeckPage extends Component {
   constructor(props) {
     super(props)
+    
     this.state = {
       selectedCards: [],
-      error: null
+      error: null,
+      name: ''
     }
     this.updateSelectedCards = this.updateSelectedCards.bind(this);
   }
@@ -39,7 +41,7 @@ class CreateDeckPage extends Component {
     const deckData = {
       deck: {
         selectedCards: allCards,
-        name: 'all cards'
+        name: this.state.name
       }
     }
     Deck.create(deckData)
@@ -55,6 +57,15 @@ class CreateDeckPage extends Component {
     
   }
 
+  handleInput = (event) => {
+    const value = event.currentTarget.value
+    this.setState( state => {
+      return {
+        name: value
+      }
+    })
+  }
+
   render() {
     return (
       <div>
@@ -67,6 +78,8 @@ class CreateDeckPage extends Component {
           />
         </div>
         <button onClick={this.saveDeck}>save Deck</button>
+        <label htmlFor="name" />
+        <input onChange={this.handleInput} type="text" name="name" value={this.state.name}/>
         <div className="selectedCards" style={{ backgroundColor: 'blue'}}>
           <CharacterList
             characters={this.state.selectedCards}
