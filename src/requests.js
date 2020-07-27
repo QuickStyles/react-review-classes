@@ -78,5 +78,11 @@ export const Deck = {
         credentials: 'include'
     })
       .then(res => res.json())
+  },
+
+  show(id) {
+    return fetch(`${BASE_URL}/decks/${id}`)
+      .then(res => res.json())
   }
+
 }

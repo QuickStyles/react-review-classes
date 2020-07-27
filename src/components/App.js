@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './Navbar';
 import CreateDeckPage from '../Page/CreateDeckPage';
 import DecksIndexPage from '../Page/DecksIndexPage';
+import DeckShowPage from '../Page/DeckShowPage';
 
 class App extends Component {
   constructor(props) {
@@ -85,7 +86,7 @@ class App extends Component {
           <Route path='/users/new' component={NewUserForm}/>
           <Route path='/sign_in' render={(routeProps) => <SessionCreatePage getCurrentUser={this.getCurrentUser} {...routeProps} />}/>
           <Route path='/decks/new' render={() => <CreateDeckPage availableCards={this.state.characters} handleCreateDeck={this.getDecksForCurrentUser}/> } />
-          <Route path='/decks/:id' render={() => <div>Deck Show Page</div>} />
+          <Route path='/decks/:id' render={(routeProps) => <DeckShowPage {...routeProps}/>} />
           <Route path='/decks' render={(routeProps)  => <DecksIndexPage decks={this.state.userDecks} history={routeProps.history}/> } />
           <Route path='/' render={() => <div>Root Page</div>}/>
         </Switch>

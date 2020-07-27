@@ -22,7 +22,7 @@ function DecksIndexPage(props) {
 
 function handleDeckClick(event, deck, history) {
   console.log(deck);
-  history.push(`/decks/${deck.id}`)
+  history.push(`/decks/${deck.id}`, deck)
 }
 
 const styles = {
