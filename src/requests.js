@@ -83,6 +83,18 @@ export const Deck = {
   show(id) {
     return fetch(`${BASE_URL}/decks/${id}`)
       .then(res => res.json())
-  }
+  },
 
+  update(data, id) {
+    return fetch(`${BASE_URL}/decks/${id}`, 
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+  }
 }

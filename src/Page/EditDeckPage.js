@@ -17,7 +17,11 @@ class EditDeckpage extends Component {
   }
 
   componentDidMount() {
-    Deck.show(this.props.match.params.id)
+    this.getDeck(this.props.match.params.id);
+  }
+
+  getDeck(id) {
+    Deck.show(id)
       .then(payload => {
         this.setState((state) => {
           return {
@@ -50,6 +54,18 @@ class EditDeckpage extends Component {
     }
   }
 
+  removeSelectedCards = (id) => {
+    // id is  the card which we click on
+    this.setState( state => {
+      const newCards = [...state.selectedCards].filter(card => {
+        return card.id !== id
+      })
+      return {
+        selectedCards: newCards
+      }
+    })
+  }
+
   editDeck = () => {
     const allCards = this.state.selectedCards
     const deckData = {
@@ -59,6 +75,10 @@ class EditDeckpage extends Component {
       }
     }
     // send a request to update this deck
+    Deck.update(deckData, this.state.id)
+      .then((res) => {
+        this.getDeck(res.id);
+      });
   }
 
   handleInput = (event) => {
@@ -88,6 +108,7 @@ class EditDeckpage extends Component {
           <CharacterList
             characters={this.state.selectedCards}
             style={{...styles.availableCardsList}}
+            selectCharacter={this.removeSelectedCards}
           />
         </div>
       </div>
